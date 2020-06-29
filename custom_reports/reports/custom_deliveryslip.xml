@@ -1,0 +1,38 @@
+<odoo>
+ <!--We have added the Responsible to the delivery report and below is the explanation for it.-->
+    <!--[template tag] - It contains template id, this ID is must and this should be unique (e.g. id="delivert_report_addition")-->
+    <!--[template tag] - inherit_id="stock.report_delivery_document". This is the External ID of the report you're modifying.-->
+    <!--in the example below, the "stock" is the module name and after '.' is the report external id ("report_delivery_document")-->
+    <!--[xpath tag].<xpath expr="//div[@class='page']/div/div[2]" position="after"> -->
+    <!--this use to locate the position where we want to 'add','remove' or 'replace' something-->
+    <!--in this xpath I said to go to "div" which has class 'Page' inside this there are 2 another 'div' and then we have-->
+    <!--two more div in it, we defined to add my div after the second div-->
+    <!--<div class="page">-->
+    <!--     <div>-->
+    <!--        <div>div one</div> -->
+    <!--        <div>div two</div>-->
+    <!--        after this add my div-->
+    <!--        <div>my div</div>-->
+    <!--     </div>-->
+    <!--</div> -->
+	<!-- the t-if attribute can be used for comparisons etc. The class attribute is css class.-->
+	<!-- The t-field attribute is used to get the value of a field, where 'o' is the report object and other are its fields -->
+
+    <template id="delivert_report_addition" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@class='page']/div/div[2]" position="after">
+            <div t-if="o.user_id.display_name" class="col-auto" name="div_respinsible">
+                <strong>Responsible:</strong>
+                <p t-field="o.user_id.display_name"/>
+            </div>
+            <div t-if="o.location_id.display_name" class="col-auto" name="div_respinsible">
+                <strong>Source Location:</strong>
+                <p t-field="o.location_id.display_name"/>
+            </div>
+            <div t-if="o.location_dest_id.display_name" class="col-auto" name="div_respinsible">
+                <strong>Destination Location:</strong>
+                <p t-field="o.location_dest_id.display_name"/>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>
